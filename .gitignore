@@ -1,0 +1,14 @@
+# OS generated files #
+######################
+$ echo .DS_Store >> .gitignore
+.DS_Store
+.DS_Store?
+Pods/
+build/
+xcuserdata/
+.build/
+*/build/*
+xcuserdata
+xcuserdata/*
+*/xcuserdata/*
+*.xcuserstate
