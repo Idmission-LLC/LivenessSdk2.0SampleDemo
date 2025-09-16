@@ -25,17 +25,18 @@ The IDmission IDentity SDK is a comprehensive toolkit that enables the use of an
 
 
 
-| Feature/Flavours |  **IdentityVideoID SDK**  |  **Identity SDK**  |  **IdentityMedium SDK**  |
-|:------|:------:|:------:|:------:|
-|**1. Document Detect**           |On Device|On Device|On Device|
-|**2. Rotate, crop etc.**         |On Device|On Device|On Server|
-|**3. Document Realness**         |On Device|On Device|On Server|
-|**4. Document Classification**   |On Device|On Device|On Server|
-|**5. MRZ/Barcode reading**       |On Device|On Device|On Device|
-|**6. OCR from front**            |On Device|On Server|On Server|
-|**7. Face detect**               |On Device|On Device|On Device|
-|**8. Liveness detect**           |On Device|On Device|On Device|
-|**9. Detect hats and sunglasses**|On Device|On Device|On Server|
+| Feature/Flavours |  **IdentityVideoID SDK**  |  **Identity SDK**  |  **IdentityMedium SDK**  |  **IdentityLiveness SDK**  |
+|:------|:------:|:------:|:------:|:------:|
+|**1. Document Detect**           |On Device|On Device|On Device|   N/A   |
+|**2. Rotate, crop etc.**         |On Device|On Device|On Server|   N/A   |
+|**3. Document Realness**         |On Device|On Device|On Server|   N/A   |
+|**4. Document Classification**   |On Device|On Device|On Server|   N/A   |
+|**5. MRZ/Barcode reading**       |On Device|On Device|On Device|   N/A   |
+|**6. OCR from front**            |On Device|On Server|On Server|   N/A   |
+|**7. Face detect**               |On Device|On Device|On Device|On Device|
+|**8. Liveness detect**           |On Device|On Device|On Device|On Device|
+|**8. FaceMask detect**           |On Device|On Device|On Device|   N/A   |
+|**9. Detect hats and sunglasses**|On Device|On Device|On Server|   N/A   |
   
 <br />
 
@@ -48,6 +49,7 @@ The IDmission IDentity SDK is a comprehensive toolkit that enables the use of an
 - [IDentityVideoIdSDK Sample App](https://github.com/Idmission-LLC/VideoIdSDK2Sample)
 - [IDentitySDK Sample App](https://github.com/Idmission-LLC/SDK2Sample)
 - [IDentityMediumSDK Sample App](https://github.com/Idmission-LLC/MediumSDK2Sample)
+- [IDentityLivenessSDK Sample App](https://github.com/Idmission-LLC/LivenessSDK2Sample)
 
 <br />
 
@@ -122,6 +124,12 @@ pod 'SignatureCaptureMedium' (Optional) : If developer required this feature the
 pod 'VoiceCaptureMedium' (Optional) : If developer required this feature they can use this framework.
 ```
 
+- **IDentityLiveness 2.0**  *pod*
+```swift
+pod 'IDentityLivenessSDK2.0'
+pod 'IDentityLivenessModels' (Optional) : If developer wanto to use SDK without models they can skip this framework.
+```
+
 ##### **Add SDK manually :** 
 
 To add IDentitySDK2.0 manually, As per your requirement choose any SDK flavour & download it from below link.
@@ -149,10 +157,15 @@ To add IDentitySDK2.0 manually, As per your requirement choose any SDK flavour &
     - `IDentityMediumSDK.xcframework`
     - `IDCaptureMedium.xcframework`
     - `SelfieCaptureMedium.xcframework`
-    - `IDentityMediumModels.xcframework` (Optional) : If developer wanto to use SDK without models they can skip this framework.    
+    - `IDentityMediumModels.xcframework` (Optional) : If developer wanto to use SDK without models they can skip this framework.
     - `SignatureCaptureMedium.xcframework` (Optional) : If developer required this feature they can use this framework.
     - `FingerPrintCaptureMedium.xcframework` (Optional) : If developer required this feature they can use this framework.
     - `VoiceCaptureMedium.xcframework` (Optional) : If developer required this feature they can use this framework.
+
+- [Download IDentityLivenessSDK2.0](https://drive.google.com/file/d/1X9ahwKrRLGYrgvkPGnjh_XBSSDJbAGik/view?usp=sharing) : Drag & drop following files in your project
+    - `IDentityLivenessSDK.xcframework`
+    - `SelfieCaptureLiveness.xcframework`
+    - `IDentityLivenessModels.xcframework` (Optional) : If developer wanto to use SDK without models they can skip this framework.    
 
 Once added respective `.xcframeworks` in your project, make sure to make it all as a `Embed & Sign` in **YourTarget -> General -> Frameworks, Libraries & and Embeded Content**.
 
@@ -189,6 +202,14 @@ pod 'GoogleMLKit/FaceDetection'
 pod 'GZIP'
 ```
 
+- **IDentityLivenessSDK2.0**  *dependencies*.  
+    
+```swift
+pod 'TensorFlowLiteSwift', '~> 2.7.0'
+pod 'GoogleMLKit/FaceDetection'
+pod 'GZIP'
+```
+
 ### **Step 5:** Steps to reduce size of your app bundle (Optional steps)
 Optionally add the following `post_install` script (replacing `APP_TARGET` with the name of your app target) to the end of your `Podfile` to prevent [CocoaPods](https://cocoapods.org/) from statically-linking the above dependencies to your app binary, unnecessarily increasing the size of your app bundle:  
 
@@ -219,10 +240,10 @@ Run `pod install` to install above mentioned dependencies.
 ### **Step 7:** Add Permissions
 
 - Add an [`NSCameraUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nscamerausagedescription) key to the app's `Info.plist` to allow camera access.  
-- Add an [`NFCReaderUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nfcreaderusagedescription) key to the app's `Info.plist` to allow NFC reader access.
-- Add an [`NSMicrophoneUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmicrophoneusagedescription) key to the app's `Info.plist` to allow microphone access.
-- Add an [`NSSpeechRecognitionUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsspeechrecognitionusagedescription) key to the app's `Info.plist` to allow speech recognition access.
 - Add an [`NSLocationWhenInUseUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nfcreaderusagedescription) key to the app's `Info.plist` to allow GPS location access.
+- Add an [`NSSpeechRecognitionUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsspeechrecognitionusagedescription) key to the app's `Info.plist` to allow speech recognition access.
+- Add an [`NSMicrophoneUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmicrophoneusagedescription) key to the app's `Info.plist` to allow microphone access.
+- Add an [`NFCReaderUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nfcreaderusagedescription) key to the app's `Info.plist` to allow NFC reader access.
 
 ### **Step 8:** Add API Required Reasons
 
@@ -329,7 +350,15 @@ import SignatureCaptureMedium (Its optional framework as per business requiremen
 import FingerPrintCaptureMedium (Its optional framework as per business requirement)
 import VoiceCaptureMedium (Its optional framework as per business requirement)
 ```
-    
+
+- To integrate **IDentityLivenessSDK** import Following frameworks.  
+
+```swift
+//For `IDentityLivenessSDK` flavours import Following Medium SDKs
+import IDentityLivenessSDK
+import SelfieCaptureLiveness
+```
+
     
 As per requirement once you done with importing above frameworks, You need to Call the following SDK Initialization API.
 
@@ -422,7 +451,7 @@ Here 'updateInitialization' is a delegate method & can be used to track the mode
 
 You can do Live face check using following method from a `UIViewController`. If successful, call `submit` to send the result to the server.
 
-  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK**</u> : For all flavours user need to use below API call for `Live Face Check`
+  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK / IDentityLivenessSDK**</u> : For all flavours user need to use below API call for `Live Face Check`
 
 ```swift
 // Start live face capture, presenting it from view controller
@@ -660,7 +689,7 @@ The `CommonCustomerDataRequest` & `AdditionalCustomerWFlagCommonData` documentat
 
 For `Enroll Biometric` you need to use below method with personalData & & the default options from a  `UIViewController`. If successful, call `submit` to send the result to the server.  
 
-  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK**</u> : For all flavours user needs to use below API call method for `Enroll Biometric`.   
+  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK / IDentityLivenessSDK**</u> : For all flavours user needs to use below API call method for `Enroll Biometric`.   
 
 ```swift
 // Start customer enroll birometric with personalData & the default options, presenting it from view controller(self)
@@ -805,7 +834,7 @@ The `CommonCustomerDataRequest`, `PersonalCustomerCommonRequestEnrollData` & `Ad
 
 For `Customer Verification` you need to use below method with personalData from a  `UIViewController`. If successful, call `submit` to send the result to the server.  
 
-  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK**</u> : For all flavours user needs to use below API call method for `Customer Verification Verification`.   
+  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK / IDentityLivenessSDK**</u> : For all flavours user needs to use below API call method for `Customer Verification Verification`.   
 
 ```swift
 // Start Customer Verification with personalData, presenting it from view controller(self)
@@ -845,7 +874,7 @@ Please refer `CommonCustomerDataRequest`, `PersonalCustomerVerifyData` & `Additi
 
 For `Customer Biometric Verification` you need to use below method of from a  `UIViewController`. If successful, call `submit` to send the result to the server.  
 
-  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK**</u> : For all flavours user needs to use below API call method for `Customer Biometric Verification`. 
+  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK / IDentityLivenessSDK**</u> : For all flavours user needs to use below API call method for `Customer Biometric Verification`. 
   
 ```swift
 // start Customer Biometric Verification, presenting it from view controller(self)
